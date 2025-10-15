@@ -31,18 +31,24 @@ class HashingProblems {
      * are not included in the average calculation.
      */
 
+
     public double getAverage(HashMap<Integer, Integer> map, int[] array) {
+        double sum = 0;
+        int count = 0;
 
-        /*
-         * ADD YOUR CODE HERE - DO NOT FORGET TO ADD YOU NAME AT TOP OF FILE
-         *
-         * Note: if NO values found in common between the HashMap and supplied array,
-         * returning 0.0 is NOT correct, as that is not the average value. Whereas
-         * returning 0.0/0.0 IS correct (which would return a non-number).
-         */
+        // go through the array and check if map has that key
+        for (int num : array) {
+            if (map.containsKey(num)) {
+                sum += map.get(num);
+                count++;
+            }
+        }
 
-         return 0.0 / 0.0;
-  }
+        // if nothing matched return NaN
+        if (count == 0) return 0.0 / 0.0;
+
+        return sum / count;
+    }
 
 
     /*
@@ -52,19 +58,19 @@ class HashingProblems {
      * values of the corresponding keys that are odd.
      */
 
-  public ArrayList<String> odd(HashMap<Integer, String> map) {
-    
-      ArrayList<String> result = new ArrayList<>();
+  public ArrayList<String> odd(HashMap<Integer, String> map) {   
+    ArrayList<String> result = new ArrayList<>();
 
-      /*
-       * ADD YOUR CODE HERE
-       *
-       * Hint: Consider iterating over the HashMap using the keySet method.
-       */
+        // just loop through keys
+    for (Integer key : map.keySet()) {
+        if (key % 2 != 0) {
+            result.add(map.get(key));
+        }
+    }
 
+    return result;
+}
 
-      return result;
-  }
 
 
   /*
@@ -104,13 +110,25 @@ class HashingProblems {
    * NOTE: Solving using a HashMap or HashSet is fine (either is okay). HashSet may be easier to code?
    */
 
-  public int twoSums(int[] numbers, int k) {
+// twoSums - count how many pairs have difference k
+    public int twoSums(int[] numbers, int k) {
+        HashSet<Integer> set = new HashSet<>();
 
-      /*
-       * ADD YOUR CODE HERE
-       */
+        // put all numbers in set
+        for (int n : numbers) {
+            set.add(n);
+        }
 
-      return -1;
-  }
+        int count = 0;
+
+        // check for each number if (n + k) exists
+        for (int n : numbers) {
+            if (set.contains(n + k)) {
+                count++;
+            }
+        }
+
+        return count;
+    }
 
 } /* end class HashingProblems */
